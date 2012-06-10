@@ -72,7 +72,10 @@ sub dfv_error_page {
     my $self = shift;
     my $r          = $self->{'__DFV_RESULT'};
     my $return_rm  = $self->{'__DFV_RETURN_RM'};
-    my $fif_params = $self->{'__DFV_FIF_PARAMS'};
+    my $fif_params = $self->param('dfv_fif_defaults') || {};
+
+    # merge the defaults with the ones given for this fill
+    $fif_params = {%$fif_params, %{$self->{'__DFV_FIF_PARAMS'}}};
 
     my $err_page = undef;
     if ($r->has_missing or $r->has_invalid) {
@@ -86,8 +89,10 @@ sub dfv_error_page {
 
         my $return_pageref = (ref($return_page) eq 'SCALAR')
             ? $return_page : \$return_page;
-        require HTML::FillInForm;
-        my $fif = new HTML::FillInForm;
+
+        my $fif_class = $self->param('dfv_fif_class') || 'HTML::FillInForm';
+        eval "require $fif_class";
+        my $fif = $fif_class->new();
         $err_page = $fif->fill(
             scalarref => $return_pageref,
             fobject => $self->query,
@@ -185,10 +190,19 @@ method through a hash reference. See an example above.
 
 =back
 
-Additionally, the value of the 'dfv_defaults' param from the calling
-object is optionally used to pass defaults to the C<new()> constructor.
+=head3 Additional Options
 
-  $self->param('dfv_defaults')
+To control things even more, you can set parameters in your L<CGI::Application>
+object itself.
+
+=over 
+
+=item dfv_defaults
+
+The value of the 'dfv_defaults' param is optionally used to pass defaults to the 
+L<Data::FormValidator> C<new()> constructor.
+
+  $self->param(dfv_defaults => { filters => ['trim'] })
 
 By setting this to a hash reference of defaults in your C<cgiapp_init> routine
 in your own super-class, you could make it easy to share some default settings for
@@ -218,6 +232,29 @@ Here's an example that I've used:
 Now all my applications that inherit from a super class with this
 C<cgiapp_init()> routine and have these defaults, so I don't have
 to add them to every profile.
+
+=item dfv_fif_class
+
+By default this plugin uses L<HTML::FillInForm> to fill in the forms
+on the error pages with the given values. This option let's you change
+that so it uses an L<HTML::FillInForm> compatible class (like a subclass) 
+to do the same work.
+
+    $self->param(dfv_fif_class => 'HTML::FillInForm::SuperDuper');
+
+=item dfv_fif_defaults
+
+The value of the 'dfv_fif_defaults' param is optionally used to pass defaults to the 
+L<HTML::FillInForm> C<fill()> method.
+
+    $self->param(dfv_fif_defaults => {ignore_fields => ['rm']})
+
+By setting this to a hash reference of defaults in your C<cgiapp_init> routine
+in your own super-class, you could make it easy to share some default settings for
+L<HTML::FillInForm> across several forms. Of course, you could also set parameter
+through an instance script via the PARAMS key.
+
+=back
 
 =head2 CGI::Application::Plugin::Forward support
 
