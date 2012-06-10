@@ -12,7 +12,7 @@ our @EXPORT = qw(
 	&validate_rm
 );
 
-our $VERSION = '2.4';
+our $VERSION = '2.5';
 
 sub check_rm {
      my $self = shift;
@@ -92,6 +92,8 @@ sub dfv_error_page {
 
         my $fif_class = $self->param('dfv_fif_class') || 'HTML::FillInForm';
         eval "require $fif_class";
+        # Deliberately do _not_ check if the eval succeeded,
+        # since $fif_class might be an inlined class not to be found in @INC.
         my $fif = $fif_class->new();
         $err_page = $fif->fill(
             scalarref => $return_pageref,
@@ -185,8 +187,9 @@ of a CGI::Application method that will return such a hash reference.
 
 =item HTML::FillInForm options (optional)
 
-If desired, you can pass additional options to the HTML::FillInForm C<fill>
-method through a hash reference. See an example above.
+If desired, you can pass additional options to the L<HTML::FillInForm>
+L<fill()|HTML::FillInForm/fill> method through a hash reference.
+See an example above.
 
 =back
 
@@ -200,7 +203,7 @@ object itself.
 =item dfv_defaults
 
 The value of the 'dfv_defaults' param is optionally used to pass defaults to the 
-L<Data::FormValidator> C<new()> constructor.
+L<Data::FormValidator> L<new()|Data::FormValidator/new()> constructor.
 
   $self->param(dfv_defaults => { filters => ['trim'] })
 
