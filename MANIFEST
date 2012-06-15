@@ -11,3 +11,5 @@ t/01_display.html
 t/99_pod.t
 t/TestApp1.pm
 t/forward.t
+t/fif_class.t
+t/fif_defaults.t
