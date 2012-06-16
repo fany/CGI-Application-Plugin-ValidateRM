@@ -1,0 +1,46 @@
+{
+   "abstract" : "Help validate CGI::Application run modes using Data::FormValidator",
+   "author" : [
+      "Mark Stosberg <mark@summersault.com>"
+   ],
+   "dynamic_config" : 1,
+   "generated_by" : "Module::Build version 0.4, CPAN::Meta::Converter version 2.120921",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "CGI-Application-Plugin-ValidateRM",
+   "prereqs" : {
+      "configure" : {
+         "requires" : {
+            "Module::Build" : "0.4"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "CGI::Application" : "3",
+            "Data::FormValidator" : "3.7",
+            "HTML::FillInForm" : "1.07"
+         }
+      }
+   },
+   "provides" : {
+      "CGI::Application::Plugin::ValidateRM" : {
+         "file" : "lib/CGI/Application/Plugin/ValidateRM.pm",
+         "version" : "2.51"
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "license" : [
+         "http://dev.perl.org/licenses/"
+      ],
+      "repository" : {
+         "url" : "https://github.com/fany/CGI-Application-Plugin-ValidateRM"
+      }
+   },
+   "version" : "2.51"
+}

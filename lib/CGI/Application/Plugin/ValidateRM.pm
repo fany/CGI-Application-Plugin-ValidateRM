@@ -12,7 +12,7 @@ our @EXPORT = qw(
 	&validate_rm
 );
 
-our $VERSION = '2.5';
+our $VERSION = '2.51';
 
 sub check_rm {
      my $self = shift;

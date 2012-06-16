@@ -1,23 +1,26 @@
 ---
-name: CGI-Application-Plugin-ValidateRM
-version: 2.4
+abstract: 'Help validate CGI::Application run modes using Data::FormValidator'
 author:
   - 'Mark Stosberg <mark@summersault.com>'
-abstract: Help validate CGI::Application run modes using Data::FormValidator
+build_requires: {}
+configure_requires:
+  Module::Build: 0.4
+dynamic_config: 1
+generated_by: 'Module::Build version 0.4, CPAN::Meta::Converter version 2.120921'
 license: perl
-resources:
-  license: http://dev.perl.org/licenses/
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: CGI-Application-Plugin-ValidateRM
+provides:
+  CGI::Application::Plugin::ValidateRM:
+    file: lib/CGI/Application/Plugin/ValidateRM.pm
+    version: 2.51
 requires:
   CGI::Application: 3
   Data::FormValidator: 3.7
   HTML::FillInForm: 1.07
-configure_requires:
-  Module::Build: 0.340201
-provides:
-  CGI::Application::Plugin::ValidateRM:
-    file: lib/CGI/Application/Plugin/ValidateRM.pm
-    version: 2.4
-generated_by: Module::Build version 0.340201
-meta-spec:
-  url: http://module-build.sourceforge.net/META-spec-v1.4.html
-  version: 1.4
+resources:
+  license: http://dev.perl.org/licenses/
+  repository: https://github.com/fany/CGI-Application-Plugin-ValidateRM
+version: 2.51

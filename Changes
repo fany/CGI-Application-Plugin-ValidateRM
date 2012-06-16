@@ -1,5 +1,8 @@
 Revision history for Perl extension CGI::Application::Plugin::ValidateRM.
 
+2.51 June 16h, 2012
+    Added repository URL to Build.PL
+
 2.5 June 10th, 2012
     New features, thanks to Michael Peters (RT#46258):
     - Support for using an alternative HTML::FillInForm class
