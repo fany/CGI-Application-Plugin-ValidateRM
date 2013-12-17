@@ -137,7 +137,7 @@ the results and possibly an a version of the form page with errors marked on the
 
 In scalar context, it returns simply the Data::FormValidator::Results object
 which conveniently evaluates to false in a boolean context if there were any missing
-or invalide fields. This is the recommended calling convention.
+or invalid fields. This is the recommended calling convention.
 
 In list context, it returns the results object followed by the error page, if any.
 This was the previous recommended syntax, and was used like this:
@@ -269,7 +269,7 @@ and you wanted this to work with the form run mode used with ::ValidateRM.
 If we detect that ::Forward is loaded, we will set the current run mode name to
 be accurate while the error page is being generated, and then set it back to
 the previous value afterwards. There is a caveat: This currently only works
-when the run name name is the same as the subroutine name for the form page.
+when the run mode name is the same as the subroutine name for the form page.
 If they differ, the current run mode name inside of the form page will be
 inaccurate. If this is a problem for you, get in touch to discuss a solution.
 
