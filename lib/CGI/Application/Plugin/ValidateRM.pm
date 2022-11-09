@@ -37,7 +37,6 @@ sub check_rm {
 
 	}
 
-     require Data::FormValidator;
      my $dfv = Data::FormValidator->new({}, $self->param('dfv_defaults') );
 	 my $r =$dfv->check($self->query,$profile);
      $self->{'__DFV_RESULT'} = $r;
