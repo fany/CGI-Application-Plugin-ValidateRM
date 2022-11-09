@@ -90,7 +90,7 @@ sub dfv_error_page {
             ? $return_page : \$return_page;
 
         my $fif_class = $self->param('dfv_fif_class') || 'HTML::FillInForm';
-        eval "require $fif_class";
+        eval { require $fif_class };
         # Deliberately do _not_ check if the eval succeeded,
         # since $fif_class might be an inlined class not to be found in @INC.
         my $fif = $fif_class->new();
